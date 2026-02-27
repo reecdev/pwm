@@ -8,4 +8,4 @@ Note that this is not the same as OpenClaw; OpenClaw is designed to be a general
 ## Requirements
 To run pwm, you will need to install Docker and Ollama on your computer. Currently, only Linux is officialy supported.
 
--# Note: pwm is stil in a very early beta and this readme is incomplete! pwm is currently not reccomended for real use, as it is not production-ready yet.
+# Note: pwm is stil in a very early beta and this readme is incomplete! pwm is currently not reccomended for real use, as it is not production-ready yet.
