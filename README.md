@@ -12,4 +12,4 @@ pwm is also designed with security in mind. When starting a worker, you will be 
 
 ## Requirements
 To run pwm, you will need to install Docker and Ollama on your computer. Currently, only Linux is officially supported.
-You will then have to install an Ollama model. We reccomend `gpt-oss:20b` since it can run on most consumer machines and is fairly smart.
+You will then have to install an Ollama model. We reccomend `qwen3.5:4b` since it can run on most consumer machines and is fairly smart.
