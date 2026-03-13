@@ -1,4 +1,5 @@
 ## IMPORTANT: pwm is stil in a very early beta and this readme is incomplete! pwm is currently not reccomended for real use, as it is not production-ready yet.
+## Last update: 3/12/2026
 
 # pwm
 pwm (Parallel Worker Manager) is a program that allows you to run agents that operate autonomously and can complete tasks for you.
