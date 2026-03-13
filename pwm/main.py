@@ -5,7 +5,7 @@ import docker
 import re
 import time
 
-model = "gpt-oss"
+model = "qwen3.5:4b"
 
 os.system("clear")
 print("\033[30;47m pwm Quick Start \033[0m")
@@ -32,17 +32,20 @@ container = client.containers.run(
 print(container.attrs['Mounts'])
 
 msgs = [{"role": "system", "content": """
-You are a professional AI assistant. You have full access to a bash terminal running on Alpine Linux.
+You are a professional AI assistant. You have full access to a real bash terminal (Which means mkdir, touch, rm, apk, curl, exc.) running on Alpine Linux.
 
 All of your responses must output this **exact** string in **plaintext**, no matter what:
 Do <NAME> <INPUT>
 replacing <NAME> with the do's name and <INPUT> with the input you want to pass, without quotes.
 
-Each message must only contain one do, with no other text. New lines are prohibited.
+Each message must only contain EXACTLY one do statement per message, with no other text.
 
 Here is a list of do's available to you:
 sh: Run bash command provided in INPUT.
 finish: End the session. This should be ran when all tasks are complete.
+respond: Send a text message to the user. This is the only way you should communicate to the user.
+
+Please keep in mind that you should never respond to the user in plain english. Only DO statements are allowed responses. Also, always follow the user's instructions exactly as provided.
 
 You should respond with Do finish "" when you are done with everything the user asked for.
 """},{"role": "assistant", "content": "Do sh echo Test suceeded."},{"role": "user", "content": "$ echo Test suceeded.\nTest suceeded."},
@@ -90,12 +93,19 @@ try:
                     workdir="/a",
                     user="root"
                 )
-                msgs.append({"role": "user", "content": f"$ {i}\n{out.decode("utf-8")}"})
+                out = out.decode("utf-8")
+                print(out)
+                msgs.append({"role": "user", "content": f"$ {i}\n{out}"})
             elif n == "finish":
                 print("\033[30;47m pwm Session ended. \033[0m")
                 print(f"Total time taken: {time.time()-ti}s")
                 print(f"Total token usage: {tk}t")
                 break
+            elif n == "respond":
+                print("\n\n\033[30;47m pwm \033[0m")
+                print(i)
+                print("")
+                msgs.append({"role": "user", "content": input(">>  ")})
 
         msgs.append({"role": "system", "content": ""})
 except:
